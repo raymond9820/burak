@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import router from "./router";
+import routerAdmin from "./routerAdmin";
 
 //1 - Entrance
 const app = express();
@@ -16,8 +17,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 //4 - Routers
-//middleware Design Pattern-- bundan butun arxitekturani qurub bolmaydi.
-// bu just slashdan kelayotgan req shu yerda integratisya qilib routerga send qiliyabdi
-app.use("/", router);
+
+app.use("/admin", routerAdmin); //Ejs
+app.use("/", router); //React
 
 export default app;

@@ -5,6 +5,7 @@ import { Adminrequest, loginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/types/enum/member.enum";
 import Errors, { Message } from "../libs/types/Errors";
 const memberService = new MemberService();
+
 const restaurantController: T = {};
 restaurantController.goHome = (req: Request, res: Response) => {
   try {
@@ -32,6 +33,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
     res.render("login");
   } catch (err) {
     console.log("ERORR, getLOgin: ", err);
+    res.redirect("/admin");
   }
 };
 
@@ -74,6 +76,21 @@ restaurantController.processLogin = async (
   } catch (err) {
     console.log("ERORR, processLogin: ", err);
     res.send(err);
+  }
+};
+
+restaurantController.processLogout = async (
+  req: Adminrequest,
+  res: Response,
+) => {
+  try {
+    console.log("processLogout");
+    req.session.destroy(function (err) {
+      res.redirect("/admin");
+    });
+  } catch (err) {
+    console.log("ERORR, processLogout: ", err);
+    res.redirect("/admin");
   }
 };
 

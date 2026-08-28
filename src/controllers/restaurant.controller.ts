@@ -47,7 +47,7 @@ restaurantController.processSignup = async (
     const result = await memberService.processSignup(newMember); //call
 
     //token session authentication
-    //autentifikatsiya) — bu "sen kimligingni tasdiqlash"
+    //autentifikatsiya) — bu "who are you?"
     req.session.member = result;
     req.session.save(function () {
       res.send(result);
@@ -58,14 +58,19 @@ restaurantController.processSignup = async (
   }
 };
 
-restaurantController.processLogin = async (req: Request, res: Response) => {
+restaurantController.processLogin = async (
+  req: Adminrequest,
+  res: Response,
+) => {
   try {
     console.log("processlogin");
     const input: loginInput = req.body;
-
     const result = await memberService.processLogin(input);
 
-    res.send(result);
+    req.session.member = result;
+    req.session.save(function () {
+      res.send(result);
+    });
   } catch (err) {
     console.log("ERORR, processLogin: ", err);
     res.send(err);

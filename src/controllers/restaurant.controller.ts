@@ -3,7 +3,7 @@ import { T } from "../libs/types/common";
 import MemberService from "../models/Members.service";
 import { Adminrequest, loginInput, MemberInput } from "../libs/types/member";
 import { MemberType } from "../libs/types/enum/member.enum";
-
+import Errors, { Message } from "../libs/types/Errors";
 const memberService = new MemberService();
 const restaurantController: T = {};
 restaurantController.goHome = (req: Request, res: Response) => {
@@ -77,4 +77,17 @@ restaurantController.processLogin = async (
   }
 };
 
+restaurantController.checkAuthSession = async (
+  req: Adminrequest,
+  res: Response,
+) => {
+  try {
+    console.log("checkAuthSession");
+    if (req.session?.member) res.send(`hey, ${req.session.member.memberNick}`);
+    else res.send(`<script>alert('${Message.NOT_AUTHORIZED}')</script>`);
+  } catch (err) {
+    console.log("ERORR, checkAuthSession: ", err);
+    res.send(err);
+  }
+};
 export default restaurantController;

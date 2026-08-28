@@ -1,5 +1,6 @@
+import session, { Session } from "express-session";
 import { memberStatus, MemberType } from "./enum/member.enum";
-
+import { Request } from "express";
 export interface Member {
   memberType: MemberType;
   memberStatus: memberStatus;
@@ -29,4 +30,9 @@ export interface MemberInput {
 export interface loginInput {
   memberNick: string;
   memberPassword: string;
+}
+
+export interface Adminrequest extends Request {
+  member: Member;
+  session: Session & { member: Member };
 }

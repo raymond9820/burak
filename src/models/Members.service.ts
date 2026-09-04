@@ -4,6 +4,7 @@ import { Member } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/types/Errors";
 import { MemberType } from "../libs/types/enum/member.enum";
 import * as bcrypt from "bcryptjs";
+
 class MemberService {
   private readonly memberModel;
 
@@ -51,12 +52,12 @@ class MemberService {
   //Define
   // SSR
   public async processSignup(input: MemberInput): Promise<Member> {
-    //   const exist = await this.memberModel
-    //     .findOne({
-    //       membertype: MemberType.RESTAURANT,
-    //     })
-    //     .exec();
-    //   if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    const exist = await this.memberModel
+      .findOne({
+        membertype: MemberType.RESTAURANT,
+      })
+      .exec();
+    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
 
     console.log("before", input.memberPassword);
     const salt = await bcrypt.genSalt();

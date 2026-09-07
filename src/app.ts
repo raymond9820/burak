@@ -7,6 +7,7 @@ import morgan from "morgan";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
+import { T } from "./libs/types/common";
 //TPC2
 const MongoStore = ConnectMongoDB(session);
 const store = new MongoStore({
@@ -39,6 +40,11 @@ app.use(
     store: store,
   }),
 );
+app.use(function (req, res, next) {
+  const sessionInstance = req.session as T;
+  res.locals.member = sessionInstance.member;
+  next();
+});
 
 //3 - Views
 app.set("views", path.join(__dirname, "views"));

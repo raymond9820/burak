@@ -38,7 +38,7 @@ const memberSchema = new Schema(
     },
 
     memberImage: {
-      type: Number,
+      type: String,
       default: 0,
     },
 

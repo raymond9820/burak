@@ -44,12 +44,11 @@ restaurantController.processSignup = async (
   try {
     console.log("processSignup");
     const file = req.file;
-    // TO'G'RI:
     if (!file)
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path;
+    newMember.memberImage = file?.path.replace(/\\/g, "/");
     newMember.memberType = MemberType.RESTAURANT;
     const result = await memberService.processSignup(newMember); //call
 
@@ -74,7 +73,7 @@ restaurantController.processLogin = async (
   res: Response,
 ) => {
   try {
-    console.log("processlogin");
+    console.log("SESSION MEMBER:", req.session.member);
     const input: loginInput = req.body;
     const result = await memberService.processLogin(input);
 

@@ -8,17 +8,17 @@ import mongoose, { Schema } from "mongoose";
 
 const productSchema = new Schema(
   {
-    ProductStatus: {
+    productStatus: {
       type: String,
       enum: ProductStatus,
       default: ProductStatus.PASUE,
     },
-    ProductCollection: {
+    productCollection: {
       type: String,
       enum: ProductCollection,
       required: true,
     },
-    produvtName: {
+    productName: {
       type: String,
       required: true,
     },
@@ -26,11 +26,11 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    productLeftCount: {
+    productNumber: {
       type: Number,
       required: true,
     },
-    ProductSize: {
+    productSize: {
       type: String,
       enum: ProductSize,
       default: ProductSize.NORMAL,
@@ -40,16 +40,13 @@ const productSchema = new Schema(
       enum: ProductVolume,
       default: ProductVolume.ONE,
     },
-    productDesck: {
+    productDesc: {
       type: String,
-      required: true,
     },
-
     productImages: {
       type: [String],
       default: [],
     },
-
     productViews: {
       type: Number,
       default: 0,
@@ -57,6 +54,7 @@ const productSchema = new Schema(
   },
   { timestamps: true },
 );
+
 productSchema.index(
   { productName: 1, productSize: 1, productVolume: 1 },
   { unique: true },

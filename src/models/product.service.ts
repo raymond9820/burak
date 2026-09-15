@@ -1,5 +1,10 @@
+import { shapeIntoMongooseObjectId } from "../libs/types/config";
 import Errors, { HttpCode, Message } from "../libs/types/Errors";
-import { Product, ProductInput } from "../libs/types/product";
+import {
+  Product,
+  ProductInput,
+  ProductUpdateInput,
+} from "../libs/types/product";
 import productModel from "../schema/product.model";
 
 class ProductService {
@@ -21,6 +26,20 @@ class ProductService {
       //throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
       throw err;
     }
+  }
+  public async updateChosenProduct(
+    id: string,
+    input: ProductUpdateInput,
+  ): Promise<Product> {
+    //String id => ObjectId
+    id = shapeIntoMongooseObjectId(id);
+    const result = await this.productModel
+      .findOneAndUpdate({ _id: id }, input, { new: true })
+      .exec();
+    if (!result)
+      throw new Errors(HttpCode.NOT_MODEIFIED, Message.UPDATE_FAILED);
+    console.log("result:", result);
+    return result;
   }
 }
 

@@ -11,7 +11,7 @@ const productSchema = new Schema(
     productStatus: {
       type: String,
       enum: ProductStatus,
-      default: ProductStatus.PASUE,
+      default: ProductStatus.PAUSE,
     },
     productCollection: {
       type: String,
@@ -26,10 +26,15 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
-    productNumber: {
+    // productNumber: {
+    //   type: Number,
+    //   required: true,
+    // },
+    productLeftCount: {
       type: Number,
       required: true,
     },
+
     productSize: {
       type: String,
       enum: ProductSize,

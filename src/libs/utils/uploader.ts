@@ -23,6 +23,7 @@ const makeUploader = (address: string) => {
 export default makeUploader;
 
 //-------------------------------------
+//bu multer mantiq aslida copy paste qiladigan mantiq
 /*const product_Storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./uploads/products");

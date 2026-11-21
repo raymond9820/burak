@@ -8,7 +8,9 @@ import morgan from "morgan";
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
 import { T } from "./libs/types/common";
+
 //TPC2
+//main focus => create store
 const MongoStore = ConnectMongoDB(session);
 const store = new MongoStore({
   uri: String(process.env.MONGO_URL),
@@ -18,17 +20,17 @@ const store = new MongoStore({
 //1 - Entrance
 //SSR (Server-Side Rendering)
 const app = express();
-
 console.log("__dirname:", __dirname);
 app.use(express.static(path.join(__dirname, "public"))); //middleware Dp > public >ochiqlanadi.
 app.use(express.urlencoded({ extended: true })); //middleware Dp > tradional API support
 app.use(express.json()); //middleware DP > Rest IP support
-app.use(morgan(MORGAN_FORMAT)); //middleware Dp  > build Logging standard
+app.use(morgan(MORGAN_FORMAT)); //middleware Dp  > build Logging standard terminal
 
 //2 - Sessionn
-//request => session => response
+
 //Tamg'a yaratish uchun asosan loginda))
 //req.cookie.sid => req.sessions. +number => Tamg'a o'qish
+//TCP3 integration
 app.use(
   session({
     secret: String(process.env.SESSION_SECRET),

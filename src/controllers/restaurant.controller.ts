@@ -128,6 +128,7 @@ restaurantController.updateChosenUser = async (req: Request, res: Response) => {
   }
 };
 
+//Authentication
 restaurantController.checkAuthSession = async (
   req: Adminrequest,
   res: Response,
@@ -142,6 +143,7 @@ restaurantController.checkAuthSession = async (
   }
 };
 
+//Authorization
 restaurantController.verifyRestaurant = async (
   req: Adminrequest,
   res: Response,

@@ -24,31 +24,31 @@ routerAdmin.get("/check-me", restaurantController.checkAuthSession);
 
 routerAdmin.get(
   "/product/all",
-  restaurantController.verifyRestaurant,
+  restaurantController.verifyRestaurant, //authorization
   productController.getAllProducts,
 );
 
 routerAdmin.post(
   "/product/create",
-  restaurantController.verifyRestaurant,
-  makeUploader("products").array("productImages", 5),
-  productController.createNewProduct,
+  restaurantController.verifyRestaurant, //authorization req.+member
+  makeUploader("products").array("productImages", 5), // uploader req.files
+  productController.createNewProduct, //req.member & req.files
 );
 routerAdmin.post(
   "/product/:id",
-  restaurantController.verifyRestaurant,
+  restaurantController.verifyRestaurant, //authorization
   productController.updateChosenProduct,
 );
 
-//User member:
+//User member control:
 routerAdmin.get(
   "/user/all",
-  restaurantController.verifyRestaurant,
+  restaurantController.verifyRestaurant, //authorization
   restaurantController.getUsers,
 );
 routerAdmin.post(
   "/user/edit",
-  restaurantController.verifyRestaurant,
+  restaurantController.verifyRestaurant, //authorization
   restaurantController.updateChosenUser,
 );
 

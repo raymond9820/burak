@@ -9,6 +9,7 @@ const productService = new ProductService();
 const productController: T = {};
 
 //BSSR
+//Define
 productController.getAllProducts = async (req: Request, res: Response) => {
   try {
     const data = await productService.getAllProducts();
@@ -20,6 +21,8 @@ productController.getAllProducts = async (req: Request, res: Response) => {
     else res.status(Errors.standart.code).json(Errors.standart);
   }
 };
+//parametr xar doim bo'ladi paste qilinmaydi
+//argument paste qilinadi
 
 productController.createNewProduct = async (
   req: Adminrequest,

@@ -4,6 +4,7 @@ import router from "./router";
 import routerAdmin from "./routerAdmin";
 import { MORGAN_FORMAT } from "./libs/types/config";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -24,6 +25,7 @@ console.log("__dirname:", __dirname);
 app.use(express.static(path.join(__dirname, "public"))); //middleware Dp > public >ochiqlanadi.
 app.use(express.urlencoded({ extended: true })); //middleware Dp > tradional API support
 app.use(express.json()); //middleware DP > Rest IP support
+app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT)); //middleware Dp  > build Logging standard terminal
 
 //2 - Sessionn
